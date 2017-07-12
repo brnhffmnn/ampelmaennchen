@@ -1,0 +1,19 @@
+group 'com.aoe.ampelmaennchen'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'application'
+apply plugin: 'kotlin'
+
+dependencies {
+    compile project(":server-core")
+}
+
+mainClassName = "com.aoe.ampelmaennchen.ApplicationKt"
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'com.aoe.ampelmaennchen.ApplicationKt'
+    }
+
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+}

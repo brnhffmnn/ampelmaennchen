@@ -1,0 +1,31 @@
+apply plugin: 'kotlin'
+
+dependencies {
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version"
+
+    compile "org.jetbrains.ktor:ktor:$ktor_version"
+    compile "org.jetbrains.ktor:ktor-jetty:$ktor_version"
+
+    compile "ch.qos.logback:logback-classic:1.2.1"
+
+    testCompile "org.jetbrains.kotlin:kotlin-test:$kotlin_version"
+    testCompile "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
+    testCompile "org.jetbrains.ktor:ktor-test-host:$ktor_version"
+}
+
+group 'com.aoe.ampelmaennchen'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+compileKotlin {
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}
+
+kotlin {
+    experimental {
+        coroutines "enable"
+    }
+}
