@@ -1,18 +1,23 @@
 package com.aoe.ampelmaennchen
 
 import com.aoe.ampelmaennchen.lights.LightSwitch
+import com.pi4j.io.gpio.GpioPinDigitalOutput
 
-abstract class RaspberryLightSwitch : LightSwitch {
+class RaspberryLightSwitch(
+        override val name: String,
+        private val gpioPinDigitalOutput: GpioPinDigitalOutput) : LightSwitch {
 
     override val isOn: Boolean
-        get() = TODO("need add pi2j")
+        get() = !gpioPinDigitalOutput.isHigh
 
     override fun switchOn(): Boolean {
-        TODO("need add pi2j")
+        gpioPinDigitalOutput.low()
+        return isOn
     }
 
     override fun switchOff(): Boolean {
-        TODO("need add pi2j")
+        gpioPinDigitalOutput.high()
+        return !isOn
     }
 
 }
