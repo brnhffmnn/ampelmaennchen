@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <bytecodeTargetLevel>
+      <module name="ampelmaenchen_main" target="1.8" />
+      <module name="ampelmaenchen_test" target="1.8" />
+      <module name="server-core_main" target="1.8" />
+      <module name="server-core_test" target="1.8" />
+      <module name="server-development_main" target="1.8" />
+      <module name="server-development_test" target="1.8" />
+      <module name="server-raspberry_main" target="1.8" />
+      <module name="server-raspberry_test" target="1.8" />
+      <module name="server_deve" target="1.8" />
+      <module name="server_devel" target="1.8" />
+      <module name="server_development" target="1.8" />
+      <module name="server_develp" target="1.8" />
+      <module name="server_main" target="1.8" />
+      <module name="server_production" target="1.8" />
+      <module name="server_raspberry" target="1.8" />
+      <module name="server_test" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
