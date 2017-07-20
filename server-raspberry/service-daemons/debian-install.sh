@@ -1,12 +1,13 @@
 #!/bin/sh
 
+WGET=`which wget`
 GITHUB_BASE=https://raw.githubusercontent.com/panzerfahrer/ampelmaennchen/master/server-raspberry
 
 echo "Downloading service script"
-wget "$GITHUB_BASE/service-daemons/debian" -O /etc/init.d/ampelmaennchen
+$WGET "$GITHUB_BASE/service-daemons/debian" -O /etc/init.d/ampelmaennchen
 
 echo "Downloading default configuration"
-wget "$GITHUB_BASE/application.conf" -O /etc/default/ampelmaennchen/application.conf
+$WGET "$GITHUB_BASE/application.conf" -O /etc/default/ampelmaennchen/application.conf
 
 echo "Preparing application directory"
 mkdir /usr/local/ampelmaennchen
