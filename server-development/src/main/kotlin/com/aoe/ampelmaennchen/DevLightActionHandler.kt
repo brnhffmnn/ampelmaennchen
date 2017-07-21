@@ -1,18 +1,23 @@
 package com.aoe.ampelmaennchen
 
 import com.aoe.ampelmaennchen.lights.LightActionCallHandler
-import com.aoe.ampelmaennchen.lights.actions.Action
-import com.aoe.ampelmaennchen.lights.actions.SwitchOffLight
-import com.aoe.ampelmaennchen.lights.actions.SwitchOnLight
-import com.aoe.ampelmaennchen.lights.actions.UnsupportedNoOpAction
+import com.aoe.ampelmaennchen.lights.actions.*
 import org.jetbrains.ktor.application.ApplicationCall
 import org.jetbrains.ktor.response.respondText
 
 class DevLightActionHandler : LightActionCallHandler {
 
-    suspend override fun perform(call: ApplicationCall, action: Action) {
-        action.perform()
+    suspend override fun perform(call: ApplicationCall, action: LightActionCallable<out Any>) {
+        action.call()
+        handleAction(call, action)
+    }
 
+    suspend override fun perform(call: ApplicationCall, action: LightActionRunnable) {
+        action.run()
+        handleAction(call, action)
+    }
+
+    private suspend fun handleAction(call: ApplicationCall, action: LightAction) {
         when (action) {
             is SwitchOffLight -> call.respondText("${action.light.name} light turning off")
             is SwitchOnLight -> call.respondText("${action.light.name} light turning on")

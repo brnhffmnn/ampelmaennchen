@@ -3,11 +3,10 @@ package com.aoe.ampelmaennchen.lights.actions
 import com.aoe.ampelmaennchen.lights.Light
 
 /**
- * An action that can be performed on a ]
+ * A generic action container that carries a [Light]
  */
-interface Action {
+interface LightAction {
 
     val light: Light
-    fun perform()
-}
 
+}

@@ -6,11 +6,11 @@ import com.aoe.ampelmaennchen.lights.LightSwitch
 /**
  * Switch off a light
  */
-class SwitchOffLight(private val lightSwitch: LightSwitch) : Action {
+class SwitchOffLight(private val lightSwitch: LightSwitch) : LightActionRunnable {
 
     override val light: Light = lightSwitch
 
-    override fun perform() {
+    override fun run() {
         lightSwitch.switchOff()
     }
 }
