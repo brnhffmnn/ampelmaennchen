@@ -23,7 +23,7 @@ class RaspberryLightActionHandler : LightActionCallHandler {
 
     private fun handleAction(call: ApplicationCall, action: LightAction) {
         when (action) {
-            !is UnsupportedNoOpAction -> call.response.status(HttpStatusCode.NotFound)
+            is UnsupportedNoOpAction -> call.response.status(HttpStatusCode.NotFound)
             else -> call.response.status(HttpStatusCode.OK)
         }
     }

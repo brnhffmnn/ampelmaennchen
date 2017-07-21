@@ -2,6 +2,7 @@ package com.aoe.ampelmaennchen
 
 import com.aoe.ampelmaennchen.lights.PedestrianLightControl
 import com.aoe.ampelmaennchen.routes.index
+import com.aoe.ampelmaennchen.routes.jobStates
 import com.aoe.ampelmaennchen.routes.manual
 import org.jetbrains.ktor.application.Application
 import org.jetbrains.ktor.application.call
@@ -23,7 +24,8 @@ class Server(app: Application, pedestrianLightControl: PedestrianLightControl) {
 
         app.install(Routing) {
             index(
-                    manual(pedestrianLightControl)
+                    manual(pedestrianLightControl),
+                    jobStates(pedestrianLightControl)
             )
         }
     }

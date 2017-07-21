@@ -8,8 +8,18 @@ import org.jetbrains.ktor.response.respondText
 class DevLightActionHandler : LightActionCallHandler {
 
     suspend override fun perform(call: ApplicationCall, action: LightActionCallable<out Any>) {
-        action.call()
-        handleAction(call, action)
+        when (action) {
+            is JobStateAction -> {
+                val result = action.call()
+                call.respondText(
+                        """
+                        | Red light is on? -> ${result.first}.
+                        | Green light is on? -> ${result.second}.
+                        """.trimMargin())
+            }
+
+            else -> handleAction(call, action)
+        }
     }
 
     suspend override fun perform(call: ApplicationCall, action: LightActionRunnable) {
