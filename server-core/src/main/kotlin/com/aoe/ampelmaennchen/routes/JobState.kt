@@ -10,14 +10,14 @@ import org.jetbrains.ktor.application.call
 import org.jetbrains.ktor.application.receive
 import org.jetbrains.ktor.http.ContentType
 import org.jetbrains.ktor.routing.Route
-import org.jetbrains.ktor.routing.accept
 import org.jetbrains.ktor.routing.post
+import org.jetbrains.ktor.routing.requestContentType
 import org.jetbrains.ktor.routing.route
 
 fun Route.jobStates(pedestrianLightControl: PedestrianLightControl): RouteDescriptor =
         describedParentRoute("Control the lights by providing a list of job states") {
             route("job-states") {
-                accept(ContentType.Application.Json) {
+                requestContentType(ContentType.Application.Json) {
                     post {
                         val body: String = call.request.receive()
                         val jobStates: Array<JobState>? = with(jacksonObjectMapper()) {

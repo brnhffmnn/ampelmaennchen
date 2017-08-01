@@ -19,15 +19,23 @@ String[] results = Jenkins.instance.allItems.findResults {
     it.getLastBuild()?.getResult()?.toString()
 }
 
-def post = new URL(URL_JOB_STATUS).openConnection()
-String message = JsonOutput.toJson(results)
+def message = JsonOutput.toJson(results)
+println("message: $message")
 
-post.setRequestMethod("POST")
-post.setDoOutput(true)
-post.setRequestProperty("Content-Type", "application/json")
-post.getOutputStream().write(message.getBytes("UTF-8"))
+def connection = new URL(URL_JOB_STATUS).openConnection();
+connection.with {
+    doInput = true
+    doOutput = true
+    requestMethod = "POST"
+    setRequestProperty("Accept", "*/*")
+    setRequestProperty("Content-Type", "application/json")
 
-def postRC = post.getResponseCode()
-if (postRC == 200) {
-    println(post.getInputStream().getText())
+    outputStream.withWriter { Writer writer ->
+        writer << message
+    }
+
+    def response = inputStream.withReader { Reader reader -> reader.text }
+
+    println("response code: ${responseCode}")
+    println(response)
 }
