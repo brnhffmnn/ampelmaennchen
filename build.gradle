@@ -26,6 +26,6 @@ allprojects {
 task wrapper(type: Wrapper) {
     group "build setup"
 
-    gradleVersion = '4.0.1'
+    gradleVersion = '4.10.2'
     distributionUrl = "https://services.gradle.org/distributions/gradle-${gradleVersion}-all.zip"
 }
