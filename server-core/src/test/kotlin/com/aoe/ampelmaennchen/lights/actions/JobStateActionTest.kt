@@ -1,6 +1,6 @@
 package com.aoe.ampelmaennchen.lights.actions
 
-import com.aoe.ampelmaennchen.createTestPedestrianLight
+import com.aoe.ampelmaennchen.lights.createTestPedestrianLight
 import com.aoe.ampelmaennchen.model.JobState
 import com.aoe.ampelmaennchen.model.JobState.*
 import io.kotlintest.matchers.shouldBe

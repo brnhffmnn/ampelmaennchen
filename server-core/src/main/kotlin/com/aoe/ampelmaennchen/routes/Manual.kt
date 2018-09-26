@@ -2,6 +2,7 @@ package com.aoe.ampelmaennchen.routes
 
 import com.aoe.ampelmaennchen.lights.LightSwitch
 import com.aoe.ampelmaennchen.lights.PedestrianLightControl
+import com.aoe.ampelmaennchen.lights.actions.GoCrazyAction
 import com.aoe.ampelmaennchen.lights.actions.SwitchOffLight
 import com.aoe.ampelmaennchen.lights.actions.SwitchOnLight
 import com.aoe.ampelmaennchen.lights.actions.UnsupportedNoOpAction
@@ -9,6 +10,7 @@ import org.jetbrains.ktor.application.call
 import org.jetbrains.ktor.routing.Route
 import org.jetbrains.ktor.routing.get
 import org.jetbrains.ktor.routing.route
+import java.time.Duration
 
 fun Route.manual(pedestrianLightControl: PedestrianLightControl): RouteDescriptor =
         describedParentRoute("manually trigger lights") {
@@ -21,6 +23,14 @@ fun Route.manual(pedestrianLightControl: PedestrianLightControl): RouteDescripto
             manualOnOff(pedestrianLightControl, pedestrianLightControl.pedestrianLight.redLight)
         }.withDescripedChild("turn green light on or off") {
             manualOnOff(pedestrianLightControl, pedestrianLightControl.pedestrianLight.greenLight)
+        }.withDescripedChild("go crazy") {
+            get("go-crazy/{duration?}") {
+                val duration = call.parameters["duration"]
+                        ?.toLongOrNull()
+                        ?.let { Duration.ofSeconds(it) }
+
+                pedestrianLightControl.actionHandler.perform(call, GoCrazyAction(pedestrianLightControl.pedestrianLight, duration))
+            }
         }
 
 

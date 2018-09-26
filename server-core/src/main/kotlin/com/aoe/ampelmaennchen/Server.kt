@@ -7,6 +7,7 @@ import com.aoe.ampelmaennchen.routes.manual
 import org.jetbrains.ktor.application.Application
 import org.jetbrains.ktor.application.call
 import org.jetbrains.ktor.application.install
+import org.jetbrains.ktor.content.TextContent
 import org.jetbrains.ktor.features.DefaultHeaders
 import org.jetbrains.ktor.features.StatusPages
 import org.jetbrains.ktor.http.HttpStatusCode
@@ -20,6 +21,7 @@ class Server(app: Application, pedestrianLightControl: PedestrianLightControl) {
         app.install(CallLogging)
         app.install(StatusPages) {
             exception<NotImplementedError> { call.respond(HttpStatusCode.NotImplemented) }
+            exception<IllegalArgumentException> { call.respond(TextContent(text = it.message.orEmpty(), status = HttpStatusCode.BadRequest)) }
         }
 
         app.install(Routing) {

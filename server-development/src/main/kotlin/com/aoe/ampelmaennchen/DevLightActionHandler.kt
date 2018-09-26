@@ -1,7 +1,10 @@
 package com.aoe.ampelmaennchen
 
 import com.aoe.ampelmaennchen.lights.LightActionCallHandler
-import com.aoe.ampelmaennchen.lights.actions.*
+import com.aoe.ampelmaennchen.lights.actions.JobStateAction
+import com.aoe.ampelmaennchen.lights.actions.LightAction
+import com.aoe.ampelmaennchen.lights.actions.LightActionCallable
+import com.aoe.ampelmaennchen.lights.actions.LightActionRunnable
 import org.jetbrains.ktor.application.ApplicationCall
 import org.jetbrains.ktor.response.respondText
 
@@ -28,10 +31,6 @@ class DevLightActionHandler : LightActionCallHandler {
     }
 
     private suspend fun handleAction(call: ApplicationCall, action: LightAction) {
-        when (action) {
-            is SwitchOffLight -> call.respondText("${action.light.name} light turning off")
-            is SwitchOnLight -> call.respondText("${action.light.name} light turning on")
-            is UnsupportedNoOpAction -> call.respondText("Not sure what to do with ${action.light.name} light ... o.O")
-        }
+        call.respondText("${action.light.name} is now ${if (action.light.isOn) "on" else "off"}")
     }
 }
