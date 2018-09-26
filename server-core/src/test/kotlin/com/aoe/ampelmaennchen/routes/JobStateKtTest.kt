@@ -4,6 +4,8 @@ import com.aoe.ampelmaennchen.test
 import io.kotlintest.matchers.shouldBe
 import io.kotlintest.specs.FeatureSpec
 import org.jetbrains.ktor.application.Application
+import org.jetbrains.ktor.http.ContentType
+import org.jetbrains.ktor.http.HttpHeaders
 import org.jetbrains.ktor.http.HttpMethod
 import org.jetbrains.ktor.http.HttpStatusCode
 import org.jetbrains.ktor.testing.handleRequest
@@ -14,9 +16,10 @@ class JobStateKtTest : FeatureSpec({
     feature("/job-states") {
         scenario("handle request with valid json") {
             withTestApplication(Application::test) {
-                with(handleRequest(HttpMethod.Post, "/job-states") {
-                    body = """ ["SUCCESS", "SUCCESS"] """
-                }) {
+                handleRequest(HttpMethod.Post, "/job-states") {
+                    addHeader(HttpHeaders.ContentType, ContentType.Application.Json.toString())
+                    body = """["SUCCESS", "SUCCESS"]"""
+                }.apply {
                     requestHandled shouldBe true
                     responded shouldBe true
                     response.status() shouldBe HttpStatusCode.OK
@@ -26,12 +29,13 @@ class JobStateKtTest : FeatureSpec({
 
         scenario("handle request") {
             withTestApplication(Application::test) {
-                with(handleRequest(HttpMethod.Post, "/job-states") {
+                handleRequest(HttpMethod.Post, "/job-states") {
+                    addHeader(HttpHeaders.ContentType, ContentType.Application.Json.toString())
                     body = ""
-                }) {
+                }.apply {
                     requestHandled shouldBe true
                     responded shouldBe true
-                    response.status() shouldBe HttpStatusCode.NotFound
+                    response.status() shouldBe HttpStatusCode.OK
                 }
             }
         }
