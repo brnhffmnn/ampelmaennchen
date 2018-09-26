@@ -6,10 +6,11 @@ import ampelmaennchen.lights.actions.GoCrazyAction
 import ampelmaennchen.lights.actions.SwitchOffLight
 import ampelmaennchen.lights.actions.SwitchOnLight
 import ampelmaennchen.lights.actions.UnsupportedNoOpAction
-import org.jetbrains.ktor.application.call
-import org.jetbrains.ktor.routing.Route
-import org.jetbrains.ktor.routing.get
-import org.jetbrains.ktor.routing.route
+import io.ktor.application.call
+import io.ktor.response.respond
+import io.ktor.routing.Route
+import io.ktor.routing.get
+import io.ktor.routing.route
 import java.time.Duration
 
 fun Route.manual(pedestrianLightControl: PedestrianLightControl): RouteDescriptor =

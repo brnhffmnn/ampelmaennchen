@@ -2,16 +2,13 @@ apply plugin: 'kotlin'
 
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
-    compile "org.jetbrains.ktor:ktor:$ktor_version"
-    compile "org.jetbrains.ktor:ktor-jetty:$ktor_version"
-
-    compile "com.fasterxml.jackson.module:jackson-module-kotlin:2.8.9"
+    compile "io.ktor:ktor-server-jetty:$ktor_version"
+    compile "io.ktor:ktor-jackson:$ktor_version"
 
     compile "ch.qos.logback:logback-classic:1.2.1"
-
-
+    
     testCompile "io.kotlintest:kotlintest:2.0.4"
-    testCompile "org.jetbrains.ktor:ktor-test-host:$ktor_version"
+    testCompile "io.ktor:ktor-server-test-host:$ktor_version"
 }
 
 group 'ampelmaennchen'

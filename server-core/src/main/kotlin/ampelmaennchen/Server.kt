@@ -4,15 +4,18 @@ import ampelmaennchen.lights.PedestrianLightControl
 import ampelmaennchen.routes.index
 import ampelmaennchen.routes.jobStates
 import ampelmaennchen.routes.manual
-import org.jetbrains.ktor.application.Application
-import org.jetbrains.ktor.application.call
-import org.jetbrains.ktor.application.install
-import org.jetbrains.ktor.content.TextContent
-import org.jetbrains.ktor.features.DefaultHeaders
-import org.jetbrains.ktor.features.StatusPages
-import org.jetbrains.ktor.http.HttpStatusCode
-import org.jetbrains.ktor.logging.CallLogging
-import org.jetbrains.ktor.routing.Routing
+import io.ktor.application.Application
+import io.ktor.application.call
+import io.ktor.application.install
+import io.ktor.features.CallLogging
+import io.ktor.features.ContentNegotiation
+import io.ktor.features.DefaultHeaders
+import io.ktor.features.StatusPages
+import io.ktor.http.HttpStatusCode
+import io.ktor.jackson.jackson
+import io.ktor.response.respond
+import io.ktor.response.respondText
+import io.ktor.routing.Routing
 
 class Server(app: Application, pedestrianLightControl: PedestrianLightControl) {
 
@@ -21,7 +24,13 @@ class Server(app: Application, pedestrianLightControl: PedestrianLightControl) {
         app.install(CallLogging)
         app.install(StatusPages) {
             exception<NotImplementedError> { call.respond(HttpStatusCode.NotImplemented) }
-            exception<IllegalArgumentException> { call.respond(TextContent(text = it.message.orEmpty(), status = HttpStatusCode.BadRequest)) }
+            exception<IllegalArgumentException> {
+                call.respondText(status = HttpStatusCode.BadRequest) { it.message.orEmpty() }
+            }
+        }
+
+        app.install(ContentNegotiation) {
+            jackson { }
         }
 
         app.install(Routing) {

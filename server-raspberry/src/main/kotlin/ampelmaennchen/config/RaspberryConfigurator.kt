@@ -1,6 +1,6 @@
 package ampelmaennchen.config
 
-import org.jetbrains.ktor.config.ApplicationConfig
+import io.ktor.config.ApplicationConfig
 
 /**
  * Reads configuration and provides access to hardware features

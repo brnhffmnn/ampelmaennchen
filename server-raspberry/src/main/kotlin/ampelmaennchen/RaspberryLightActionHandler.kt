@@ -5,8 +5,8 @@ import ampelmaennchen.lights.actions.LightAction
 import ampelmaennchen.lights.actions.LightActionCallable
 import ampelmaennchen.lights.actions.LightActionRunnable
 import ampelmaennchen.lights.actions.UnsupportedNoOpAction
-import org.jetbrains.ktor.application.ApplicationCall
-import org.jetbrains.ktor.http.HttpStatusCode
+import io.ktor.application.ApplicationCall
+import io.ktor.http.HttpStatusCode
 
 
 class RaspberryLightActionHandler : LightActionCallHandler {

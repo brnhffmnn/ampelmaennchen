@@ -3,13 +3,14 @@ package ampelmaennchen.routes
 import ampelmaennchen.test
 import io.kotlintest.matchers.shouldBe
 import io.kotlintest.specs.FeatureSpec
-import org.jetbrains.ktor.application.Application
-import org.jetbrains.ktor.http.ContentType
-import org.jetbrains.ktor.http.HttpHeaders
-import org.jetbrains.ktor.http.HttpMethod
-import org.jetbrains.ktor.http.HttpStatusCode
-import org.jetbrains.ktor.testing.handleRequest
-import org.jetbrains.ktor.testing.withTestApplication
+import io.ktor.application.Application
+import io.ktor.http.ContentType
+import io.ktor.http.HttpHeaders
+import io.ktor.http.HttpMethod
+import io.ktor.http.HttpStatusCode
+import io.ktor.server.testing.handleRequest
+import io.ktor.server.testing.setBody
+import io.ktor.server.testing.withTestApplication
 
 class JobStateKtTest : FeatureSpec({
 
@@ -18,10 +19,9 @@ class JobStateKtTest : FeatureSpec({
             withTestApplication(Application::test) {
                 handleRequest(HttpMethod.Post, "/job-states") {
                     addHeader(HttpHeaders.ContentType, ContentType.Application.Json.toString())
-                    body = """["SUCCESS", "SUCCESS"]"""
+                    setBody("""["SUCCESS", "SUCCESS"]""")
                 }.apply {
                     requestHandled shouldBe true
-                    responded shouldBe true
                     response.status() shouldBe HttpStatusCode.OK
                 }
             }
@@ -31,10 +31,9 @@ class JobStateKtTest : FeatureSpec({
             withTestApplication(Application::test) {
                 handleRequest(HttpMethod.Post, "/job-states") {
                     addHeader(HttpHeaders.ContentType, ContentType.Application.Json.toString())
-                    body = ""
+                    setBody("")
                 }.apply {
                     requestHandled shouldBe true
-                    responded shouldBe true
                     response.status() shouldBe HttpStatusCode.OK
                 }
             }

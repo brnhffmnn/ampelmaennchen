@@ -2,9 +2,9 @@ package ampelmaennchen
 
 import ampelmaennchen.lights.PedestrianLight
 import ampelmaennchen.lights.PedestrianLightControl
-import org.jetbrains.ktor.application.Application
-import org.jetbrains.ktor.host.embeddedServer
-import org.jetbrains.ktor.jetty.Jetty
+import io.ktor.application.Application
+import io.ktor.server.engine.embeddedServer
+import io.ktor.server.jetty.Jetty
 import java.nio.file.Paths
 
 fun Application.development() {
@@ -22,7 +22,7 @@ fun main(args: Array<String>) {
     embeddedServer(
             factory = Jetty,
             port = 8080,
-            reloadPackages = watches,
+            watchPaths = watches,
             module = Application::development
     ).start()
 }

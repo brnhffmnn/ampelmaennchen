@@ -4,9 +4,10 @@ import ampelmaennchen.config.RaspberryConfigurator
 import ampelmaennchen.lights.PedestrianLight
 import ampelmaennchen.lights.PedestrianLightControl
 import com.pi4j.io.gpio.GpioFactory
-import org.jetbrains.ktor.application.Application
-import org.jetbrains.ktor.host.commandLineEnvironment
-import org.jetbrains.ktor.jetty.JettyApplicationHost
+import io.ktor.application.Application
+import io.ktor.server.engine.commandLineEnvironment
+import io.ktor.server.engine.embeddedServer
+import io.ktor.server.jetty.Jetty
 import kotlin.concurrent.thread
 
 fun Application.raspberry() {
@@ -39,5 +40,5 @@ fun Application.raspberry() {
 
 fun main(args: Array<String>) {
     val environment = commandLineEnvironment(args)
-    JettyApplicationHost(environment).start()
+    embeddedServer(Jetty, environment).start()
 }

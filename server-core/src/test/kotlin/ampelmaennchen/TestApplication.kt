@@ -3,9 +3,9 @@ package ampelmaennchen
 import ampelmaennchen.lights.LightActionCallHandler
 import ampelmaennchen.lights.actions.LightActionCallable
 import ampelmaennchen.lights.actions.LightActionRunnable
-import org.jetbrains.ktor.application.Application
-import org.jetbrains.ktor.application.ApplicationCall
-import org.jetbrains.ktor.response.respondText
+import io.ktor.application.Application
+import io.ktor.application.ApplicationCall
+import io.ktor.response.respondText
 
 fun Application.test() {
     createTestServer(this, actionHandler = object : LightActionCallHandler {

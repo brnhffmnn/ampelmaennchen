@@ -2,7 +2,7 @@ package ampelmaennchen.lights
 
 import ampelmaennchen.lights.actions.LightActionCallable
 import ampelmaennchen.lights.actions.LightActionRunnable
-import org.jetbrains.ktor.application.ApplicationCall
+import io.ktor.application.ApplicationCall
 
 /**
  * Allows to handle an [LightActionRunnable] triggered by a [ApplicationCall].

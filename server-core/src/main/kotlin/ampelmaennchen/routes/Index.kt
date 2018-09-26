@@ -1,11 +1,11 @@
 package ampelmaennchen.routes
 
-import org.jetbrains.ktor.application.call
-import org.jetbrains.ktor.http.ContentType
-import org.jetbrains.ktor.response.respondText
-import org.jetbrains.ktor.routing.Route
-import org.jetbrains.ktor.routing.accept
-import org.jetbrains.ktor.routing.get
+import io.ktor.application.call
+import io.ktor.http.ContentType
+import io.ktor.response.respondText
+import io.ktor.routing.Route
+import io.ktor.routing.accept
+import io.ktor.routing.get
 
 fun Route.index(vararg routeDescriptors: RouteDescriptor) {
     accept(ContentType.Text.Any) {

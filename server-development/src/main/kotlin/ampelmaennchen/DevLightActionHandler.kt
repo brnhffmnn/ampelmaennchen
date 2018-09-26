@@ -5,8 +5,8 @@ import ampelmaennchen.lights.actions.JobStateAction
 import ampelmaennchen.lights.actions.LightAction
 import ampelmaennchen.lights.actions.LightActionCallable
 import ampelmaennchen.lights.actions.LightActionRunnable
-import org.jetbrains.ktor.application.ApplicationCall
-import org.jetbrains.ktor.response.respondText
+import io.ktor.application.ApplicationCall
+import io.ktor.response.respondText
 
 class DevLightActionHandler : LightActionCallHandler {
 
