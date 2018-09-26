@@ -14,7 +14,7 @@ dependencies {
     testCompile "org.jetbrains.ktor:ktor-test-host:$ktor_version"
 }
 
-group 'com.aoe.ampelmaennchen'
+group 'ampelmaennchen'
 version '1.0-SNAPSHOT'
 
 sourceCompatibility = 1.8

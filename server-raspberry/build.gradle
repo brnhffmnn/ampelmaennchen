@@ -1,4 +1,4 @@
-group 'com.aoe.ampelmaennchen'
+group 'ampelmaennchen'
 version '1.0-SNAPSHOT'
 
 apply plugin: 'application'
@@ -14,11 +14,11 @@ dependencies {
     compile "com.pi4j:pi4j-core:1.2-SNAPSHOT"
 }
 
-mainClassName = "com.aoe.ampelmaennchen.ApplicationKt"
+mainClassName = "ampelmaennchen.ApplicationKt"
 
 jar {
     manifest {
-        attributes 'Main-Class': 'com.aoe.ampelmaennchen.ApplicationKt'
+        attributes 'Main-Class': 'ampelmaennchen.ApplicationKt'
     }
 
     from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
