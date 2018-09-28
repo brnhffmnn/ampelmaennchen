@@ -1,6 +1,6 @@
 # A tinker project: Use a pedestrian light as a CI job status light
 
-_fill in some motivational words describing the goal_
+![](images/ampel.gif)
 
 ### Project Structure
 
