@@ -4,6 +4,7 @@ import ampelmaennchen.lights.PedestrianLightControl
 import ampelmaennchen.routes.index
 import ampelmaennchen.routes.jobStates
 import ampelmaennchen.routes.manual
+import ampelmaennchen.routes.morse
 import io.ktor.application.Application
 import io.ktor.application.call
 import io.ktor.application.install
@@ -36,7 +37,8 @@ class Server(app: Application, pedestrianLightControl: PedestrianLightControl) {
         app.install(Routing) {
             index(
                     manual(pedestrianLightControl),
-                    jobStates(pedestrianLightControl)
+                    jobStates(pedestrianLightControl),
+                    morse(pedestrianLightControl)
             )
         }
     }

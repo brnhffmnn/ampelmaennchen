@@ -11,12 +11,18 @@ class RaspberryLightSwitch(
         get() = !gpioPinDigitalOutput.isHigh
 
     override fun switchOn(): Boolean {
-        gpioPinDigitalOutput.low()
+        if (!isOn) {
+            gpioPinDigitalOutput.low()
+        }
+
         return isOn
     }
 
     override fun switchOff(): Boolean {
-        gpioPinDigitalOutput.high()
+        if (isOn) {
+            gpioPinDigitalOutput.high()
+        }
+
         return !isOn
     }
 
