@@ -1,0 +1,4 @@
+ext {
+    kotlin_version = "1.2.71"
+    ktor_version = "0.9.5"
+}

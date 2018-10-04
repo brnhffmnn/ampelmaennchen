@@ -2,7 +2,7 @@ group 'ampelmaennchen'
 version '1.0-SNAPSHOT'
 
 buildscript {
-    ext.kotlin_version = "1.2.71"
+    apply from: file("versions.gradle")
 
     repositories {
         jcenter()
@@ -14,9 +14,8 @@ buildscript {
 }
 
 allprojects {
-    ext.kotlin_version = "1.2.71"
-    ext.ktor_version = "0.9.5"
-
+    apply from: rootProject.file("versions.gradle")
+    
     repositories {
         jcenter()
         maven { url  "http://kotlin.bintray.com/ktor" }
