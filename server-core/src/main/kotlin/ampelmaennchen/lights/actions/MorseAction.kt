@@ -3,9 +3,9 @@ package ampelmaennchen.lights.actions
 import ampelmaennchen.lights.Light
 import ampelmaennchen.lights.StatefulLightSwitch
 import ampelmaennchen.lights.withState
-import kotlinx.coroutines.experimental.NonCancellable
-import kotlinx.coroutines.experimental.delay
-import kotlinx.coroutines.experimental.runBlocking
+import kotlinx.coroutines.NonCancellable
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.runBlocking
 
 class MorseAction(private val lightSwitch: StatefulLightSwitch,
                   private val message: String) : LightActionRunnable {

@@ -6,6 +6,7 @@ buildscript {
 
     repositories {
         jcenter()
+        maven { url "https://dl.bintray.com/kotlin/kotlin-eap" }
     }
 
     dependencies {
@@ -15,10 +16,11 @@ buildscript {
 
 allprojects {
     apply from: rootProject.file("versions.gradle")
-    
+
     repositories {
         jcenter()
-        maven { url  "http://kotlin.bintray.com/ktor" }
+        maven { url "http://kotlin.bintray.com/ktor" }
+        maven { url "https://dl.bintray.com/kotlin/kotlin-eap" }
     }
 }
 
