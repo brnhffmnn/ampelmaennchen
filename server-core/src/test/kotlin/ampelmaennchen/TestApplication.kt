@@ -9,12 +9,12 @@ import io.ktor.response.respondText
 
 fun Application.test() {
     createTestServer(this, actionHandler = object : LightActionCallHandler {
-        suspend override fun perform(call: ApplicationCall, action: LightActionRunnable) {
+        override suspend fun perform(call: ApplicationCall, action: LightActionRunnable) {
             action.run()
             call.respondText("tested: $action")
         }
 
-        suspend override fun perform(call: ApplicationCall, action: LightActionCallable<out Any>) {
+        override suspend fun perform(call: ApplicationCall, action: LightActionCallable<out Any>) {
             val result = action.call()
             call.respondText("tested: $action => $result")
         }

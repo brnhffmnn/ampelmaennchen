@@ -25,7 +25,7 @@ class JobStateAction(override val light: PedestrianLight,
         }
     } == states.size
 
-    override fun call(): Pair<Boolean, Boolean> {
+    override suspend fun call(): Pair<Boolean, Boolean> {
         when {
             states.isEmpty() -> {
                 light.greenLight.switchOff()

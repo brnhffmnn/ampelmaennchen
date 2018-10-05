@@ -2,6 +2,7 @@ package ampelmaennchen.lights.actions
 
 import ampelmaennchen.lights.Light
 import ampelmaennchen.lights.RedGreenLightSwitch
+import kotlinx.coroutines.delay
 import java.time.Duration
 import java.util.*
 
@@ -17,7 +18,7 @@ class GoCrazyAction(private val redGreenLight: RedGreenLightSwitch,
     private val random = Random()
     private val duration = (duration ?: DEFAULT_DURATION)
 
-    override fun run() {
+    override suspend fun run() {
         require(duration.seconds in 1..30) { "Can only go crazy from 1 to 30 seconds" }
 
         val greenWasOn = redGreenLight.greenLight.isOn
@@ -30,7 +31,7 @@ class GoCrazyAction(private val redGreenLight: RedGreenLightSwitch,
 
             val wait = (random.nextInt(35) + 10) * 10
             anim -= wait
-            Thread.sleep(wait.toLong())
+            delay(wait.toLong())
         }
 
         when (greenWasOn) {

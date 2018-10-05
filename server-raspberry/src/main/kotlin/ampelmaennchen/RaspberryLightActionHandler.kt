@@ -11,12 +11,12 @@ import io.ktor.http.HttpStatusCode
 
 class RaspberryLightActionHandler : LightActionCallHandler {
 
-    suspend override fun perform(call: ApplicationCall, action: LightActionCallable<out Any>) {
+    override suspend fun perform(call: ApplicationCall, action: LightActionCallable<out Any>) {
         action.call()
         handleAction(call, action)
     }
 
-    suspend override fun perform(call: ApplicationCall, action: LightActionRunnable) {
+    override suspend fun perform(call: ApplicationCall, action: LightActionRunnable) {
         action.run()
         handleAction(call, action)
     }

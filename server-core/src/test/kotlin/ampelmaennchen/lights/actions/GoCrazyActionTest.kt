@@ -1,5 +1,6 @@
 package ampelmaennchen.lights.actions
 
+import ampelmaennchen.TestCoroutineDispatcher
 import ampelmaennchen.lights.testRedGreenLightSwitch
 import io.kotlintest.matchers.shouldThrow
 import io.kotlintest.properties.forAll
@@ -7,6 +8,7 @@ import io.kotlintest.properties.headers
 import io.kotlintest.properties.row
 import io.kotlintest.properties.table
 import io.kotlintest.specs.FreeSpec
+import kotlinx.coroutines.runBlocking
 import java.time.Duration
 
 class GoCrazyActionTest : FreeSpec({
@@ -28,10 +30,14 @@ class GoCrazyActionTest : FreeSpec({
 
                 if (exception) {
                     shouldThrow<IllegalArgumentException> {
-                        GoCrazyAction(testLight, duration).run()
+                        runBlocking(TestCoroutineDispatcher()) {
+                            GoCrazyAction(testLight, duration).run()
+                        }
                     }
                 } else {
-                    GoCrazyAction(testLight, duration).run()
+                    runBlocking(TestCoroutineDispatcher()) {
+                        GoCrazyAction(testLight, duration).run()
+                    }
                 }
             }
         }

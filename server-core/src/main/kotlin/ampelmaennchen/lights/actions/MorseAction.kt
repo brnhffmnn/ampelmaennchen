@@ -3,9 +3,7 @@ package ampelmaennchen.lights.actions
 import ampelmaennchen.lights.Light
 import ampelmaennchen.lights.StatefulLightSwitch
 import ampelmaennchen.lights.withState
-import kotlinx.coroutines.NonCancellable
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.runBlocking
 
 class MorseAction(private val lightSwitch: StatefulLightSwitch,
                   private val message: String) : LightActionRunnable {
@@ -80,7 +78,7 @@ class MorseAction(private val lightSwitch: StatefulLightSwitch,
 
     override val light: Light = lightSwitch
 
-    override fun run() {
+    override suspend fun run() {
         val morseThis = message.toUpperCase()
 
         morseThis.filterNot { ALLOWED_CHARACTERS.contains(it) }.let {
@@ -90,7 +88,7 @@ class MorseAction(private val lightSwitch: StatefulLightSwitch,
         }
 
         lightSwitch.withState {
-            runBlocking(NonCancellable) { morseAsync(morseThis) }
+            morseAsync(morseThis)
         }
     }
 

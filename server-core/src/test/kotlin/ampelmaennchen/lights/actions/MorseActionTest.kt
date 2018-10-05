@@ -1,9 +1,11 @@
 package ampelmaennchen.lights.actions
 
+import ampelmaennchen.TestCoroutineDispatcher
 import ampelmaennchen.lights.StatefulLightSwitch
 import io.kotlintest.matchers.shouldBe
 import io.kotlintest.matchers.shouldThrow
 import io.kotlintest.specs.ShouldSpec
+import kotlinx.coroutines.runBlocking
 import org.slf4j.LoggerFactory
 
 class MorseActionTest : ShouldSpec({
@@ -43,9 +45,11 @@ class MorseActionTest : ShouldSpec({
     }
 
     fun testMorse(msg: String, block: TestLight.() -> Unit) {
-        val light = TestLight()
-        MorseAction(light, msg).run()
-        light.apply { block() }
+        runBlocking(TestCoroutineDispatcher()) {
+            val light = TestLight()
+            MorseAction(light, msg).run()
+            light.apply { block() }
+        }
     }
 
     should("morse message") {

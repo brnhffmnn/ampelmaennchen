@@ -7,7 +7,7 @@ import ampelmaennchen.lights.Light
  */
 class UnsupportedNoOpAction(override val light: Light) : LightActionRunnable {
 
-    override fun run() {
+    override suspend fun run() {
         // no-op
     }
 }

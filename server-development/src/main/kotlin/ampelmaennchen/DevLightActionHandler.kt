@@ -10,7 +10,7 @@ import io.ktor.response.respondText
 
 class DevLightActionHandler : LightActionCallHandler {
 
-    suspend override fun perform(call: ApplicationCall, action: LightActionCallable<out Any>) {
+    override suspend fun perform(call: ApplicationCall, action: LightActionCallable<out Any>) {
         when (action) {
             is JobStateAction -> {
                 val result = action.call()
@@ -25,7 +25,7 @@ class DevLightActionHandler : LightActionCallHandler {
         }
     }
 
-    suspend override fun perform(call: ApplicationCall, action: LightActionRunnable) {
+    override suspend fun perform(call: ApplicationCall, action: LightActionRunnable) {
         action.run()
         handleAction(call, action)
     }

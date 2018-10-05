@@ -1,10 +1,11 @@
 package ampelmaennchen.lights.actions
 
-import java.util.concurrent.Callable
-
 /**
  * A [LightAction] that returns a result.
  *
  * @param T The result type
  */
-interface LightActionCallable<T> : Callable<T>, LightAction
+interface LightActionCallable<T> : LightAction {
+
+    suspend fun call(): T
+}

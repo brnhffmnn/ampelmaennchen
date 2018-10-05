@@ -46,9 +46,9 @@ interface StatefulLightSwitch : LightSwitch {
     }
 }
 
-fun StatefulLightSwitch.withState(block: StatefulLightSwitch.() -> Unit) {
+suspend fun <T> StatefulLightSwitch.withState(block: suspend StatefulLightSwitch.() -> T): T {
     val savepoint = saveState()
-    try {
+    return try {
         block()
     } finally {
         restoreState(savepoint)

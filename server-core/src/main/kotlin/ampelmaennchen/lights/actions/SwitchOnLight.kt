@@ -10,7 +10,7 @@ class SwitchOnLight(private val lightSwitch: LightSwitch) : LightActionRunnable 
 
     override val light: Light = lightSwitch
 
-    override fun run() {
+    override suspend fun run() {
         lightSwitch.switchOn()
     }
 }

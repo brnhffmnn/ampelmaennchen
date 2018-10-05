@@ -9,6 +9,7 @@ import io.kotlintest.properties.headers
 import io.kotlintest.properties.row
 import io.kotlintest.properties.table
 import io.kotlintest.specs.FreeSpec
+import kotlinx.coroutines.runBlocking
 
 
 class JobStateActionTest : FreeSpec({
@@ -26,9 +27,11 @@ class JobStateActionTest : FreeSpec({
         forAll(table) { states, expectedRed, expectedGreen ->
             (states.joinToString()) {
                 with(JobStateAction(createTestPedestrianLight(), states)) {
-                    with(call()) {
-                        first shouldBe expectedRed
-                        second shouldBe expectedGreen
+                    runBlocking {
+                        with(call()) {
+                            first shouldBe expectedRed
+                            second shouldBe expectedGreen
+                        }
                     }
                 }
             }
